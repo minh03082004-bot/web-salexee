@@ -1,0 +1,410 @@
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Showroom Sale Xee</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/cars">SALE XEE SHOWROOM</a>
+            <a href="/admin/add-car" class="btn btn-outline-light btn-sm">Admin: Thêm Xe</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="mb-4">Danh sách xe đang bán</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+<div class="card shadow-sm h-100">
+    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500" class="card-img-top" alt="Car">
+    
+    <div class="card-body">
+        <h5 class="card-title fw-bold">Porsche 911 Carrera</h5>
+        <p class="text-danger fw-bold fs-5">6.900.000.000 VNĐ</p>
+        <p class="card-text text-muted small">Năm sản xuất: 2024 | Số tự động</p>
+        
+        <div class="d-grid gap-2">
+            <a href="/car-detail" class="btn btn-primary">
+                Xem chi tiết
+            </a>
+            
+            <button class="btn btn-success">
+                <i class="bi bi-cart-plus"></i> Mua ngay
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+    </div>
+</div>
+   
+</body>
+</html> -->
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sale Xee - Showroom Ô Tô</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> -->
+    <link rel="stylesheet" th:href="@{/css/style.css?v=5}">
+</head>
+
+<!-- <body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/cars">SALE XEE</a>
+        </div>
+         <div class="auth-menu">
+
+       
+        <div th:if="${session.user == null}">
+            <a href="/login">Đăng nhập</a>
+            <a href="/register">Đăng ký</a>
+        </div>
+
+       
+        <div th:if="${session.user != null}">
+            <span>
+                Xin chào,
+                <b th:text="${session.user.username}"></b>
+            </span>
+
+            <a href="/logout">Đăng xuất</a>
+        </div>
+
+    </div>
+
+</div>
+    </nav> -->
+    <body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+
+    <div class="container d-flex justify-content-between align-items-center">
+
+        <a class="navbar-brand fw-bold" href="/cars">
+            SALE XEE
+        </a>
+
+        <div class="auth-menu">
+
+            <!-- chưa đăng nhập -->
+            <div th:if="${session.user == null}">
+                <a href="/login" class="text-white me-3 text-decoration-none">
+                    Đăng nhập
+                </a>
+
+                <a href="/register" class="text-white text-decoration-none">
+                    Đăng ký
+                </a>
+            </div>
+
+            <!-- đã đăng nhập -->
+            <!-- <div th:if="${session.user != null}">
+                <span class="text-white me-3">
+                    Xin chào,
+                    <b th:text="${session.user.username}"></b>
+                </span>
+
+                <a href="/logout" class="text-white text-decoration-none">
+                    Đăng xuất
+                </a>
+            </div> -->
+    <div th:if="${session.user != null}">
+
+    <span class="text-white me-3">
+        Xin chào,
+        <b th:text="${session.user.username}"></b>
+    </span>
+
+    <!-- <a th:if="${session.user.role == 'ADMIN'}"
+       href="/admin/cars"
+       class="text-warning me-3 text-decoration-none fw-bold">
+        Quản trị
+    </a> -->
+
+    <!-- Logout -->
+    <a href="/logout"
+       class="text-white text-decoration-none">
+        Đăng xuất
+    </a>
+
+</div>
+
+        </div>
+
+    </div>
+
+</nav>
+    
+
+    <div class="container">
+        <h2 class="mb-4">Danh sách xe đang bán</h2> 
+        <div class="card shadow-sm mb-4 p-3">  
+             <!-- <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500" class="card-img-top" alt="Car">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">Porsche 911 Carrera</h5>
+                        <p class="text-danger fw-bold fs-5">6.900.000.000 VNĐ</p>
+                        <p class="card-text text-muted small mb-3">Năm sản xuất: 2024 | Số tự động</p>
+                        
+                        <div class="d-grid gap-2">
+                            <a href="/car-detail" class="btn btn-primary">
+                                <i class="bi bi-eye"></i> Xem chi tiết
+                            </a>
+                            <button class="btn btn-success">
+                                <i class="bi bi-cart-plus"></i> Mua ngay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             </div> 
+    </div>
+</body>
+</html> -->
+      <form th:action="@{/cars}" method="get">
+        <div class="row g-2">
+
+            <!-- Tên xe -->
+            <div class="col-md-3">
+                <input type="text" name="keyword"
+                       class="form-control"
+                       placeholder="Nhập tên xe..."
+                       th:value="${keyword}">
+            </div>
+
+            <!-- Hãng xe -->
+            <!-- <div class="col-md-3">
+                <input type="text" name="brand"
+                       class="form-control"
+                       placeholder="Hãng xe (Toyota, BMW...)"
+                       th:value="${brand}">
+            </div> -->
+             <div class="col-md-3">
+        <select name="brand" class="form-control">
+            <option value="">Tất cả hãng</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Audi">Audi</option>
+            <option value="Mercedes">Mercedes</option>
+            <option value="VinFast">VinFast</option>
+        </select>
+    </div>
+
+            <!-- Giá từ -->
+            <div class="col-md-2">
+                <input type="number" name="minPrice"
+                       class="form-control"
+                       placeholder="Giá từ"
+                       th:value="${minPrice}">
+            </div>
+
+            <!-- Giá đến -->
+            <div class="col-md-2">
+                <input type="number" name="maxPrice"
+                       class="form-control"
+                       placeholder="Đến"
+                       th:value="${maxPrice}">
+            </div>
+
+            <!-- Nút tìm -->
+            <div class="col-md-2 d-grid">
+                <button type="submit" class="btn btn-primary">
+                    🔍 Tìm kiếm
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+<!-- <div class="brand-list text-center mb-4">
+
+    <a th:href="@{/cars(brand='Toyota')}">
+        <img th:src="@{/images/logo/toyota.png}" class="brand-logo">
+        <p>Toyota</p>
+    </a>
+
+    <a th:href="@{/cars(brand='Audi')}">
+        <img src="/images/logo/Audi.png" class="brand-logo">
+        <p>Audi</p>
+    </a>
+
+    <a th:href="@{/cars(brand='Mercedes-Benz')}">
+        <img src="/images/logo/mercedes.png" class="brand-logo">
+        <p>Mercedes</p>
+    </a>
+
+    <a th:href="@{/cars(brand='Vinfast')}">
+        <img src="/images/logo/vinfast.png" class="brand-logo">
+        <p>Vinfast</p>
+    </a>
+
+</div> -->
+<div class="brand-list">
+
+    <a th:href="@{/cars(brand='Toyota')}"
+       class="brand-item"
+       th:classappend="${brand == 'Toyota'} ? ' active'">
+
+        <img th:src="@{/images/logo/toyota.png}" class="brand-logo">
+        <span>Toyota</span>
+    </a>
+   
+
+    <a th:href="@{/cars(brand='Audi')}"
+       class="brand-item"
+       th:classappend="${brand == 'Audi'} ? ' active'">
+
+        <img th:src="@{/images/logo/audi.png}" class="brand-logo">
+        <span>Audi</span>
+    </a>
+
+    <a th:href="@{/cars(brand='Honda')}"
+       class="brand-item"
+       th:classappend="${brand == 'Honda'} ? ' active'">
+
+        <img th:src="@{/images/logo/honda.png}" class="brand-logo">
+        <span>Honda</span>
+    </a>
+
+    <a th:href="@{/cars(brand='Kia')}"
+       class="brand-item"
+       th:classappend="${brand == 'Kia'} ? ' active'">
+
+        <img th:src="@{/images/logo/kia.png}" class="brand-logo">
+        <span>KIA</span>
+    </a>
+     <a th:href="@{/cars(brand='Hyundai')}"
+       class="brand-item"
+       th:classappend="${brand == 'Hyundai'} ? ' active'">
+
+        <img th:src="@{/images/logo/hyundai.png}" class="brand-logo">
+        <span>Hyundai</span>
+    </a>
+     <a th:href="@{/cars(brand='Mazda')}"
+       class="brand-item"
+       th:classappend="${brand == 'Mazda'} ? ' active'">
+
+        <img th:src="@{/images/logo/mazda.png}" class="brand-logo">
+        <span>Mazda</span>
+    </a>
+
+</div>
+
+            <div class="row">  
+     <div class="col-md-4 mb-4" th:each="xe : ${listXe}">
+        <div class="card shadow-sm h-100">
+            <div class="car-img-container">
+            <!-- <img th:src="${xe.image}" class="card-img-top" alt="Car"> -->
+            <img th:src="${xe.image.startsWith('http')} 
+              ? ${xe.image}: @{/images/{file}(file=${xe.image})}" class="card-img-top" alt="Car">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title fw-bold" th:text="${xe.name}">Tên xe mẫu</h5>
+                <p class="text-danger fw-bold fs-5" 
+                   th:text="${#numbers.formatDecimal(xe.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'">
+                </p>
+                
+                <p class="card-text text-muted small mb-3">
+                    Năm sản xuất: <span th:text="${xe.year}">2024</span>
+                </p>
+                
+                <div class="mt-auto d-grid gap-2">
+                    <a th:href="@{/car-detail/{id}(id=${xe.id})}" class="btn btn-primary">Xem chi tiết</a>
+                    <button class="btn btn-success">
+                                <i class="bi bi-cart-plus"></i> Mua ngay </button>
+                    </div> 
+                </div>
+             </div>
+         </div>
+             </div>
+             <div class="d-flex justify-content-center mt-4">
+
+    <ul class="pagination">
+
+        <!-- Previous -->
+        <li class="page-item" th:if="${currentPage > 0}">
+            <a class="page-link"
+               th:href="@{/cars(page=${currentPage-1},
+                keyword=${keyword},
+                brand=${brand},
+                minPrice=${minPrice},
+                maxPrice=${maxPrice})}">
+               Previous
+            </a>
+        </li>
+
+        <!-- Số trang -->
+        <li class="page-item"
+            th:each="i : ${#numbers.sequence(0, totalPages-1)}"
+            th:classappend="${i == currentPage} ? 'active'">
+
+            <a class="page-link"
+               th:href="@{/cars(page=${i},
+                keyword=${keyword},
+                brand=${brand},
+                minPrice=${minPrice},
+                maxPrice=${maxPrice})}"
+               th:text="${i+1}">
+            </a>
+
+        </li>
+
+        <!-- Next -->
+        <li class="page-item"
+            th:if="${currentPage < totalPages-1}">
+
+            <a class="page-link"
+               th:href="@{/cars(page=${currentPage+1},
+                keyword=${keyword},
+                brand=${brand},
+                minPrice=${minPrice},
+                maxPrice=${maxPrice})}">
+               Next
+            </a>
+
+        </li>
+
+    </ul>
+             
+</div>
+            </div>
+         </body>
+</html>  
+ 
+
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Showroom - User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container py-5">
+        <h2 class="text-center mb-5 fw-bold text-primary">DANH SÁCH XE ĐANG BÁN</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4" th:each="xe : ${listXe}">
+                <div class="card h-100 shadow-sm">
+                    <div class="car-img-container">
+                        <img th:src="${xe.image}" alt="Car Image">
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold" th:text="${xe.name}">Tên xe</h5>
+                        <p class="price-text mb-2" th:text="${#numbers.formatDecimal(xe.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></p>
+                        <p class="text-muted small">Năm: <span th:text="${xe.year}"></span></p>
+                        <div class="mt-auto d-grid gap-2">
+                            <a th:href="@{/car-detail/{id}(id=${xe.id})}" class="btn btn-outline-primary">Xem chi tiết</a>
+                            <a th:href="@{/buy/{id}(id=${xe.id})}" class="btn btn-danger">Mua xe ngay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> -->

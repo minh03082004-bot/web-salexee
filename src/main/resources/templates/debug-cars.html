@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Debug Cars</title>
+</head>
+<body>
+<h1>Debug Cars</h1>
+<table border="1" cellpadding="6">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Image (raw)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${cars}">
+        <td th:text="${c.id}">ID</td>
+        <td th:text="${c.name}">Name</td>
+        <td><img th:src="${c.image}" style="width:150px;" /></td>
+        <td th:text="${c.image}">Image</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
