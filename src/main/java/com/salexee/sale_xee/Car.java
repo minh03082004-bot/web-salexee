@@ -23,19 +23,14 @@ public class Car {
     private String description;
     @Column(name = "brand")
       private String brand;
-
-    // 1. Constructor không tham số (Bắt buộc phải có để Database hoạt động)
     public Car() {
     }
-
-    // 2. Constructor có tham số (Để bạn dùng trong initDatabase)
     public Car(String name, Long price, String image,String year,String description,String brand, String images) {
         this.name = name;
         this.price = price;
         this.image = image;
         this. year = year;
         this.images = images;
-        // this.carYear = carYear;
         this.description=description;
         this.brand=brand;
     }
@@ -53,8 +48,6 @@ public class Car {
     public void setBrand(String brand) {
     this.brand = brand;
     }
-
-    // 3. Getter và Setter (Để Spring Boot có thể đọc/ghi dữ liệu)
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

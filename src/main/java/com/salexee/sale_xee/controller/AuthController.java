@@ -1,5 +1,4 @@
 package com.salexee.sale_xee.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,32 +9,22 @@ import com.salexee.sale_xee.User;
 import com.salexee.sale_xee.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
-
 @Controller
 public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
 
-    // =========================
-    // MỞ TRANG LOGIN
-    // =========================
     @GetMapping("/login")
     public String loginPage() {
         return "login";
     }
 
-    // =========================
-    // MỞ TRANG REGISTER
-    // =========================
     @GetMapping("/register")
     public String registerPage() {
         return "register";
     }
 
-    // =========================
-    // XỬ LÝ ĐĂNG KÝ
-    // =========================
     @PostMapping("/register")
     public String register(
             @RequestParam String username,
@@ -55,9 +44,6 @@ public class AuthController {
         return "redirect:/login";
     }
 
-    // =========================
-    // XỬ LÝ LOGIN
-    // =========================
     @PostMapping("/login")
     public String login(
             @RequestParam String username,
@@ -81,9 +67,6 @@ public class AuthController {
         return "redirect:/login?error";
     }
 
-    // =========================
-    // LOGOUT
-    // =========================
     @GetMapping("/logout")
     public String logout(HttpSession session) {
 

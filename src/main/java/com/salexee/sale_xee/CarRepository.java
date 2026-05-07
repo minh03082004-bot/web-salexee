@@ -1,5 +1,4 @@
 package com.salexee.sale_xee;
-
 import java.util.List;
 
 import org.springframework.data.domain.Page;

@@ -36,15 +36,12 @@ h2{
     margin-top:15px;
 }
 </style>
-
 </head>
 <body>
 
 <div class="register-box">
 
     <h2>Đăng ký tài khoản</h2>
-
-    <!-- Báo lỗi trùng tài khoản -->
     <div th:if="${param.error}" class="alert alert-danger">
         Tên đăng nhập đã tồn tại
     </div>

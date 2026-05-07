@@ -1,32 +1,3 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <title>Chi tiết xe</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-7">
-                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800" class="img-fluid rounded" alt="Car Detail">
-            </div>
-            <div class="col-md-5">
-                <h1>Porsche 911 Carrera</h1>
-                <h3 class="text-danger">6.900.000.000 VNĐ</h3>
-                <hr>
-                <p><strong>Tình trạng:</strong> Mới 100%</p>
-                <p><strong>Màu sắc:</strong> Trắng / Đen / Đỏ</p>
-                <p><strong>Động cơ:</strong> 3.0L Twin-Turbo</p>
-                <p><strong>Mô tả:</strong> Xe thể thao huyền thoại, cảm giác lái phấn khích...</p>
-                <button class="btn btn-success btn-lg w-100">Liên hệ mua ngay</button>
-                <a href="/cars" class="btn btn-link mt-2">Quay lại danh sách</a>
-            </div>
-        </div>
-    </div>
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -39,41 +10,10 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-md-6">
-                <!-- <img th:src="${car.image}" class="img-fluid rounded shadow" alt="Car"> -->
-                <!-- Ảnh lớn -->
-<!-- <img id="mainImage"
-     th:if="${!#lists.isEmpty(imageList)}"
-     th:src="@{/images/{file}(file=${imageList[0]})}"
-     class="main-img">  -->
-      <!-- <img id="mainImage"
-     th:src="@{/images/{file}(file=${imageList[0]})}"
-     class="main-img"> -->
-
- <!-- <img th:if="${#lists.isEmpty(imageList)}"
-     th:src="@{/images/{file}(file=${car.image})}"
-     class="main-img"> --> 
      <img id="mainImage"
      th:src="${car.image.startsWith('http')} ? ${car.image} : @{/images/{file}(file=${car.image})}"
      class="main-img">
-   <!-- <img th:src="@{/images/{file}(file=${#strings.trim(car.image)})}"
-     class="main-img"> -->
-     
 
-<!-- Ảnh nhỏ -->
-<!-- <div class="sub-img-container"
-     th:if="${!#lists.isEmpty(imageList)}">
-
-    <img th:each="img : ${imageList}"
-         th:src="@{/images/{file}(file=${img})}"
-         class="sub-img"
-         onclick="changeImage(this)">
-</div> -->
-<!-- <div class="sub-img-container">
-    <img th:each="img : ${imageList}"
-         th:src="@{/images/{file}(file=${img})}"
-         class="sub-img"
-         onclick="changeImage(this)">
-</div> -->
 <div class="sub-img-container"
      th:if="${!#lists.isEmpty(imageList)}">
 
@@ -93,10 +33,7 @@
                 <p th:text="${car.description}"style="white-space: pre-line;">Thông tin mô tả xe sẽ hiển thị ở đây...</p>
                 
                 <div class="mt-4 d-grid gap-2 d-md-block">
-                    <!-- <a th:href="@{/buy/{id}(id=${xe.id})}" class="btn btn-success px-4">Mua ngay</a>
-                    
-                    <a th:href="@{/admin/edit/{id}(id=${xe.id})}" class="btn btn-warning px-4">Sửa thông tin</a>
-                     -->
+
                     <a href="javascript:history.back()" class="btn btn-outline-secondary">Quay lại</a>
                 </div>
             </div>
@@ -106,10 +43,7 @@
 function changeImage(img){
     document.getElementById("mainImage").src = img.src;
 
-    // bỏ active cũ
     document.querySelectorAll('.sub-img').forEach(i => i.classList.remove('active'));
-
-    // thêm active mới
     img.classList.add('active');
 }
 </script>

@@ -1,11 +1,8 @@
 package com.salexee.sale_xee;
-
- import org.springframework.boot.CommandLineRunner;
- import org.springframework.boot.SpringApplication;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-
 @SpringBootApplication
 public class SaleXeeApplication {
 
@@ -22,6 +19,4 @@ public class SaleXeeApplication {
         //repository.save(new Car("Tesla Model S", 3500000000L, "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=500", "2025"));
     };
 }
-
-  
-} // Dấu ngoặc này phải là dấu cuối cùng của file!
+} 

@@ -10,20 +10,14 @@
 <h2 class="mb-4">📊 Dashboard</h2>
 
 <div class="row">
-
-    <!-- TỔNG XE -->
     <div class="col-md-4">
         <div class="card text-center p-3 shadow">
             <h5>Tổng số xe</h5>
             <h2 th:text="${totalCars}"></h2>
         </div>
     </div>
-
-    <!-- TỔNG USER -->
     <div class="col-md-4">
         <div class="card text-center p-3 shadow">
-            <!-- <h5>Tổng user</h5>
-            <h2 th:text="${totalUsers}"></h2> -->
             <h5>User</h5>
 <h2 th:text="${totalUsers}"></h2>
 
@@ -50,6 +44,7 @@
     </tr>
 
 </table>
+<a href="javascript:history.back()" class="btn btn-outline-secondary">Quay lại</a>
 
 </body>
 </html>

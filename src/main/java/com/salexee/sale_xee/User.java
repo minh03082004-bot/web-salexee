@@ -1,11 +1,9 @@
 package com.salexee.sale_xee;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
 @Entity
 @Table(name = "users")
 public class User {
@@ -28,8 +26,6 @@ public class User {
         this.password = password;
         this.role = role;
     }
-
-    // Getter Setter
 
     public Long getId() {
         return id;

@@ -10,50 +10,26 @@
     <div th:if="${car.image}" class="mb-3">
         <label class="form-label">Ảnh hiện tại:</label>
         <div class="car-img-container mb-2">
-            <!-- <img th:src="@{${car.image}}" class="card-img-top" alt="Current Image" style="width:100%; height:200px; object-fit:cover;"/> -->
      <img th:src="@{/images/{file}(file=${car.image})}" class="card-img-top" alt="Current Image" style="width:100%; height:200px; object-fit:cover;"/>
         </div>
     </div>
     <form th:action="@{/admin/update/{id}(id=${car.id})}" th:object="${car}" method="post" enctype="multipart/form-data">
          <input type="hidden" th:field="*{image}"> 
-          <!-- <input type="hidden" name="image" th:value="*{image}"> -->
         <div class="mb-3">
             <label class="form-label">Tên xe:</label>
             <input type="text" th:field="*{name}" class="form-control" required>
         </div>
-        <!-- <div class="mb-3">
-            <label class="form-label">Giá xe (VNĐ):</label>
-            <input type="number" th:field="*{price}" class="form-control" required> -->
-            <!-- <p th:text="${#numbers.formatDecimal(xe.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></p> -->
-             <!-- <input type="text"
-       th:value="${#numbers.formatDecimal(car.price,0,'COMMA',0,'POINT')}"
-       name="price"
-       class="form-control"> -->
-        <!-- </div> -->
          <input type="text"
        id="priceInput"
        th:field="*{price}"
        placeholder="Nhập giá xe"
        onkeyup="formatPrice(this)">
-        <!-- <div class="mb-3">
-            <label class="form-label">Link ảnh:</label>
-            <input type="text" th:field="*{image}" class="form-control">
-        </div> -->
-        <!-- <div class="mb-3">
-    <label class="form-label">Chọn ảnh từ thư viện máy tính:</label>
-    <input type="file" name="imageFile" class="form-control" accept="image/*">
-   </div> -->
-   <!-- giữ ảnh cũ -->
-<!-- <input type="hidden" th:field="*{image}">
-<input type="hidden" th:field="*{images}"> -->
 
-<!-- ẢNH CHÍNH -->
 <div class="mb-3">
     <label>Đổi ảnh chính:</label>
     <input type="file" name="imageFile" class="form-control" accept="image/*">
 </div>
 
-<!-- ẢNH NHỎ -->
 <div class="mb-3">
     <label>Đổi ảnh chi tiết:</label>
     <input type="file" name="subImages" multiple class="form-control" accept="image/*">
@@ -69,7 +45,6 @@
                       style="white-space: pre-line;"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-        <!-- <a href="/admin-cars" class="btn btn-secondary">Hủy bỏ</a> -->
          <a th:href="@{/admin/cars}" class="btn btn-secondary">Hủy bỏ</a>
     </form>
     <script>
