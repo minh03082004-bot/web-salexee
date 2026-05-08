@@ -6,7 +6,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "cars,admin-cars"; 
+        return "redirect:/cars"; 
     }
 }
 
