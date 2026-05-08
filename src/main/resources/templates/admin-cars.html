@@ -154,7 +154,7 @@
 </div>
 <div class="brand-list">
 
-    <a th:href="@{/cars(brand='Toyota')}"
+    <a th:href="@{/admin/cars(brand='Toyota')}"
        class="brand-item"
        th:classappend="${brand == 'Toyota'} ? ' active'">
 
@@ -163,7 +163,7 @@
     </a>
    
 
-    <a th:href="@{/cars(brand='Audi')}"
+    <a th:href="@{/admin/cars(brand='Audi')}"
        class="brand-item"
        th:classappend="${brand == 'Audi'} ? ' active'">
 
@@ -171,7 +171,7 @@
         <span>Audi</span>
     </a>
 
-    <a th:href="@{/cars(brand='Honda')}"
+    <a th:href="@{/admin/cars(brand='Honda')}"
        class="brand-item"
        th:classappend="${brand == 'Honda'} ? ' active'">
 
@@ -179,28 +179,28 @@
         <span>Honda</span>
     </a>
 
-    <a th:href="@{/cars(brand='Kia')}"
+    <a th:href="@{/admin/cars(brand='Kia')}"
        class="brand-item"
        th:classappend="${brand == 'Kia'} ? ' active'">
 
         <img th:src="@{/images/logo/kia.png}" class="brand-logo">
         <span>KIA</span>
     </a>
-     <a th:href="@{/cars(brand='Hyundai')}"
+     <a th:href="@{/admin/cars(brand='Hyundai')}"
        class="brand-item"
        th:classappend="${brand == 'Hyundai'} ? ' active'">
 
         <img th:src="@{/images/logo/hyundai.png}" class="brand-logo">
         <span>Hyundai</span>
     </a>
-     <a th:href="@{/cars(brand='Mazda')}"
+     <a th:href="@{/admin/cars(brand='Mazda')}"
        class="brand-item"
        th:classappend="${brand == 'Mazda'} ? ' active'">
 
         <img th:src="@{/images/logo/mazda.png}" class="brand-logo">
         <span>Mazda</span>
     </a>
-     <a th:href="@{/cars(brand='Mercedes')}"
+     <a th:href="@{/admin/cars(brand='Mercedes')}"
        class="brand-item"
        th:classappend="${brand == 'Mercedes'} ? ' active'">
 
@@ -228,7 +228,7 @@
                     Năm sản xuất: <span th:text="${xe.year}">2024</span>
                 </p> 
                         <div class="d-grid gap-2">
-                            <a th:href="@{/car-detail/{id}(id=${xe.id})}"
+                            <a th:href="@{/admin/car-detail/{id}(id=${xe.id})}"
                             class="btn btn-primary">
                                 <i class="bi bi-eye"></i> Xem chi tiết
                             </a>
