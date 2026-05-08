@@ -125,10 +125,10 @@
             <option value="Audi">Audi</option>
             <option value="Mercedes">Mercedes</option>
             <option value="VinFast">VinFast</option>
-             <option value="Honda">Honda</option>
-              <option value="Hyundai">Hyundai</option>
-               <option value="Mazda">Mazda</option>
-                <option value="KIA">KIA</option>
+            <option value="Honda">Honda</option>
+            <option value="Hyundai">Hyundai</option>
+            <option value="Mazda">Mazda</option>
+           <option value="KIA">KIA</option>
         </select>
     </div>
             <div class="col-md-2">
@@ -199,6 +199,13 @@
 
         <img th:src="@{/images/logo/mazda.png}" class="brand-logo">
         <span>Mazda</span>
+    </a>
+     <a th:href="@{/cars(brand='Mercedes')}"
+       class="brand-item"
+       th:classappend="${brand == 'Mercedes'} ? ' active'">
+
+        <img th:src="@{/images/logo/merc.png}" class="brand-logo">
+        <span>Mercedes</span>
     </a>
 
 </div>

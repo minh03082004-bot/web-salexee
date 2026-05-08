@@ -219,6 +219,14 @@
         <img th:src="@{/images/logo/mazda.png}" class="brand-logo">
         <span>Mazda</span>
     </a>
+    
+    <a th:href="@{/cars(brand='Mercedes')}"
+       class="brand-item"
+       th:classappend="${brand == 'Mercedes'} ? ' active'">
+
+        <img th:src="@{/images/logo/merc.png}" class="brand-logo">
+        <span>Mercedes</span>
+    </a>
 
 </div>
 
