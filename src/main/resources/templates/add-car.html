@@ -29,8 +29,28 @@
         <label>Năm sản xuất:</label>
         <input type="text" th:field="*{year}" class="form-control">
     </div>
-        <input type="text" name="brand" class="form-control" placeholder="Hãng xe">
+        <!-- <input type="text" name="brand" class="form-control" placeholder="Hãng xe"> -->
+      <div class="mb-3">
 
+    <label>Hãng xe</label>
+
+    <select name="brand"
+            class="form-select"
+            required>
+
+        <option value="">
+            -- Chọn hãng xe --
+        </option>
+
+        <option th:each="b : ${brands}"
+                th:value="${b.name}"
+                th:text="${b.name}">
+
+        </option>
+
+    </select>
+
+</div>
     <div class="mb-3">
         <label>Mô tả chi tiết:</label>
         <textarea th:field="*{description}" class="form-control" rows="5" style="white-space: pre-line;"></textarea>

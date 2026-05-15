@@ -46,6 +46,7 @@
             <th>Giá</th>
 
             <th>Ngày mua</th>
+            <th>Số điện thoại</th>
 
         </tr>
 
@@ -57,7 +58,7 @@
 
             <td th:text="${o.username}">
             </td>
-
+           
             <td>
 
                 <img th:src="${o.car.image.startsWith('http')} 
@@ -75,7 +76,8 @@
 
             <td th:text="${o.orderDate}">
             </td>
-
+         <td th:text="${o.phone}">
+             </td>
         </tr>
 
         </tbody>

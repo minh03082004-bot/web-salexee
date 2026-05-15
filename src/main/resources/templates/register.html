@@ -46,6 +46,10 @@ h2{
         Tên đăng nhập đã tồn tại
     </div>
 
+    <div th:if="${param.invalidPassword}" class="alert alert-danger">
+        Mật khẩu phải chứa chỉ chữ thường và số
+    </div>
+
     <form action="/register" method="post">
 
         <div class="mb-3">
@@ -55,14 +59,34 @@ h2{
                    class="form-control"
                    required>
         </div>
-
         <div class="mb-3">
-            <label>Mật khẩu</label>
-            <input type="password"
-                   name="password"
-                   class="form-control"
-                   required>
-        </div>
+
+    <label>Mật khẩu</label>
+
+    <div class="position-relative">
+
+        <input type="password"
+               id="password"
+               name="password"
+               class="form-control"
+               required>
+
+        <span onclick="togglePassword()"
+              style="
+                  position:absolute;
+                  right:15px;
+                  top:50%;
+                  transform:translateY(-50%);
+                  cursor:pointer;
+              ">
+
+            👁
+
+        </span>
+
+    </div>
+
+</div>
 
         <button type="submit"
                 class="btn btn-success btn-register">
@@ -77,6 +101,24 @@ h2{
     </div>
 
 </div>
+<script>
+
+function togglePassword() {
+
+    let password =
+        document.getElementById("password");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+    } else {
+
+        password.type = "password";
+    }
+}
+
+</script>
 
 </body>
 </html>

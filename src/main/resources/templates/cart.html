@@ -87,12 +87,28 @@
                     <b th:text="${#numbers.formatDecimal(total,0,'COMMA',0,'POINT')} + ' VNĐ'">
                     </b>
                 </p>
-                <a href="/cart/checkout"
+                <div class="mb-3">
+               <label>
+                Số điện thoại
+               </label>
+           <input type="text"
+           id="phone"
+           class="form-control"
+           placeholder="Nhập số điện thoại">
+            </div>
+                <!-- <a href="/cart/checkout"
                 class="btn btn-success w-100">
 
                   Đặt mua
 
-                  </a>
+                  </a> -->
+                  <a id="checkoutBtn"
+                    href="/cart/checkout"
+                  class="btn btn-success w-100">
+
+               Đặt mua
+
+               </a>
 
             </div>
 
@@ -101,6 +117,29 @@
     </div>
 
 </div>
+<script>
 
+document
+.getElementById("checkoutBtn")
+.addEventListener("click", function(e) {
+
+    e.preventDefault();
+
+    let phone =
+        document.getElementById("phone").value;
+
+    if(phone.trim() === "") {
+
+        alert("Vui lòng nhập số điện thoại!");
+
+        return;
+    }
+
+    window.location.href =
+        "/cart/checkout?phone="
+        + encodeURIComponent(phone);
+});
+
+</script>
 </body>
 </html>

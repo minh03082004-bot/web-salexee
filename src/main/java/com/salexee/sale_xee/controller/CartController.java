@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.salexee.sale_xee.Car;
 import com.salexee.sale_xee.CarRepository;
@@ -106,7 +107,7 @@ public String removeFromCart(@PathVariable Long id,
 }
 @GetMapping("/cart/checkout")
 public String checkout(HttpSession session,
-                       Model model) {
+                       Model model,@RequestParam String phone) {
 
     User user = (User) session.getAttribute("user");
 
@@ -128,6 +129,7 @@ public String checkout(HttpSession session,
     order.setUsername(user.getUsername());
 
     order.setCarId(item.getCarId());
+    order.setPhone(phone);
 
     order.setOrderDate(LocalDateTime.now());
 
@@ -174,7 +176,8 @@ public String myOrders(HttpSession session,
                     new OrderView(
                             item.getUsername(),
                             car,
-                            item.getOrderDate()
+                            item.getOrderDate(),
+                            item.getPhone()
                     )
             );
         }

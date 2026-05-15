@@ -7,14 +7,16 @@ public class OrderView {
     private Car car;
 
     private LocalDateTime orderDate;
+    private String phone;
 
     public OrderView(String username,
                      Car car,
-                     LocalDateTime orderDate) {
+                     LocalDateTime orderDate,String phone) {
 
         this.username = username;
         this.car = car;
         this.orderDate = orderDate;
+        this.phone = phone;
     }
 
     public String getUsername() {
@@ -28,4 +30,7 @@ public class OrderView {
     public LocalDateTime getOrderDate() {
         return orderDate;
     }
+    public String getPhone() {
+    return phone;
+}
 }

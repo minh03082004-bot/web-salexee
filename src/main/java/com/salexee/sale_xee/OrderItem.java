@@ -20,6 +20,7 @@ public class OrderItem {
     private Long carId;
 
     private LocalDateTime orderDate;
+    private String phone;
 
     public OrderItem() {
     }
@@ -51,4 +52,11 @@ public class OrderItem {
     public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
+    public String getPhone() {
+    return phone;
+}
+
+public void setPhone(String phone) {
+    this.phone = phone;
+}
 }

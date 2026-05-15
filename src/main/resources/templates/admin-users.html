@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Quản lý user</title>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+</head>
+
+<body class="container py-5">
+
+<!-- <h2 class="mb-4">
+    Quản lý người dùng
+</h2> -->
+<div class="d-flex
+            justify-content-between
+            align-items-center
+            mb-4">
+
+    <h2>
+        Quản lý người dùng
+    </h2>
+
+    <a href="/admin/cars"
+       class="btn btn-secondary">
+
+        ⬅ Quay lại
+
+    </a>
+
+</div>
+<table class="table table-bordered">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>Username</th>
+
+            <th>Role</th>
+
+            <th>Trạng thái</th>
+
+            <th>Thao tác</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr th:each="u : ${users}">
+
+            <td th:text="${u.id}"></td>
+
+            <td th:text="${u.username}"></td>
+
+            <td th:text="${u.role}"></td>
+
+            <td>
+
+                <span th:if="${u.enabled}"
+                      class="text-success">
+
+                    Hoạt động
+
+                </span>
+
+                <span th:unless="${u.enabled}"
+                      class="text-danger">
+
+                    Đã khóa
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <a th:if="${u.enabled}"
+                   th:href="@{/admin/lock/{id}(id=${u.id})}"
+                   class="btn btn-danger btn-sm">
+
+                    Khóa
+
+                </a>
+
+                <a th:unless="${u.enabled}"
+                   th:href="@{/admin/unlock/{id}(id=${u.id})}"
+                   class="btn btn-success btn-sm">
+
+                    Mở khóa
+
+                </a>
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+</body>
+
+</html>

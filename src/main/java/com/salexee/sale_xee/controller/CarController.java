@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.salexee.sale_xee.Brand;
+import com.salexee.sale_xee.BrandRepository;
 import com.salexee.sale_xee.Car;
 import com.salexee.sale_xee.CarRepository;
 import com.salexee.sale_xee.CartRepository;
@@ -42,8 +44,10 @@ private UserRepository userRepository;
 private CartRepository cartRepository;
 @Autowired
 private OrderRepository orderRepository;
+@Autowired
+private BrandRepository brandRepository;
     
-    @GetMapping("/cars")
+@GetMapping("/cars")
 public String userCars(Model model,HttpSession session,
          @RequestParam(defaultValue = "0") int page,
         @RequestParam(required = false) String keyword,
@@ -74,6 +78,11 @@ if (brand != null && brand.trim().isEmpty()) brand = null;
     model.addAttribute("brand", brand);
     model.addAttribute("minPrice", minPrice);
     model.addAttribute("maxPrice", maxPrice);
+      model.addAttribute(
+            "brands",
+            brandRepository.findAll()
+    );
+
     return "cars";
 }
 @GetMapping("/admin/cars")
@@ -110,6 +119,10 @@ public String adminCars(Model model,
     model.addAttribute("brand", brand);
     model.addAttribute("minPrice", minPrice);
     model.addAttribute("maxPrice", maxPrice);
+     model.addAttribute(
+            "brands",
+            brandRepository.findAll()
+    );
 
     return "admin-cars";
 }
@@ -120,10 +133,22 @@ public String adminCars(Model model,
         return "debug-cars";
     }
 
+// @GetMapping("/admin/add")
+// public String showAddForm(Model model) {
+//     model.addAttribute("car", new Car()); 
+//     return "add-car"; 
+// }
 @GetMapping("/admin/add")
-public String showAddForm(Model model) {
-    model.addAttribute("car", new Car()); 
-    return "add-car"; 
+public String addCarForm(Model model) {
+
+    model.addAttribute("car", new Car());
+
+    model.addAttribute(
+            "brands",
+            brandRepository.findAll()
+    );
+
+    return "add-car";
 }
 
 @PostMapping("/admin/save")
@@ -281,7 +306,8 @@ public String adminOrders(Model model) {
                     new OrderView(
                             item.getUsername(),
                             car,
-                            item.getOrderDate()
+                            item.getOrderDate(),
+                            item.getPhone()
                     )
             );
         }
@@ -290,5 +316,93 @@ public String adminOrders(Model model) {
     model.addAttribute("orders", orderViews);
 
     return "admin-orders";
+}
+@GetMapping("/admin/users")
+public String users(Model model) {
+
+    model.addAttribute(
+            "users",
+            userRepository.findAll()
+    );
+
+    return "admin-users";
+}
+@GetMapping("/admin/lock/{id}")
+public String lockUser(@PathVariable Long id) {
+
+    User user =
+            userRepository.findById(id)
+            .orElse(null);
+
+    if(user != null) {
+
+        user.setEnabled(false);
+
+        userRepository.save(user);
+    }
+
+    return "redirect:/admin/users";
+}
+@GetMapping("/admin/unlock/{id}")
+public String unlockUser(@PathVariable Long id) {
+
+    User user =
+            userRepository.findById(id)
+            .orElse(null);
+
+    if(user != null) {
+
+        user.setEnabled(true);
+
+        userRepository.save(user);
+    }
+
+    return "redirect:/admin/users";
+}
+@GetMapping("/admin/brands")
+public String brands(Model model) {
+
+    model.addAttribute(
+            "brands",
+            brandRepository.findAll()
+    );
+
+    return "admin-brands";
+}
+@GetMapping("/admin/brands/add")
+public String addBrandForm() {
+
+    return "add-brand";
+}
+@PostMapping("/admin/brands/save")
+public String saveBrand(
+        @RequestParam String name,
+        @RequestParam("logoFile")
+        MultipartFile logoFile
+) throws IOException {
+
+    String fileName =
+            System.currentTimeMillis()
+            + "_"
+            + logoFile.getOriginalFilename();
+
+    Path path = Paths.get(
+            "src/main/resources/static/images/"
+            + fileName
+    );
+
+    Files.createDirectories(path.getParent());
+
+    Files.write(path, logoFile.getBytes());
+
+    Brand brand = new Brand();
+
+    brand.setName(name);
+
+    brand.setLogo(fileName);
+
+    brandRepository.save(brand);
+
+    return "redirect:/admin/brands";
 }
 }

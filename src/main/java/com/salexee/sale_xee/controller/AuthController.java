@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.salexee.sale_xee.User;
 import com.salexee.sale_xee.UserRepository;
@@ -26,23 +27,34 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(
-            @RequestParam String username,
-            @RequestParam String password
-    ) {
+public String register(
+        @RequestParam String username,
+        @RequestParam String password,
+        RedirectAttributes redirectAttributes
+) {
 
-        User oldUser = userRepository.findByUsername(username);
+    User oldUser = userRepository.findByUsername(username);
 
-        if (oldUser != null) {
-            return "redirect:/register?error";
-        }
-
-        User user = new User(username, password, "USER");
-
-        userRepository.save(user);
-
-        return "redirect:/login";
+    if (oldUser != null) {
+        return "redirect:/register?error";
     }
+
+    if (!password.matches("^[a-z0-9]+$")) {
+
+         return "redirect:/register?invalidPassword";
+        
+    }
+
+    User user = new User(username, password, "USER");
+
+    userRepository.save(user);
+    redirectAttributes.addFlashAttribute(
+        "success",
+        "Đăng ký tài khoản thành công!"
+);
+
+    return "redirect:/login";
+}
 
     @PostMapping("/login")
     public String login(
@@ -52,7 +64,10 @@ public class AuthController {
     ) {
 
         User user = userRepository.findByUsername(username);
+         if (user != null && !user.isEnabled()) {
 
+        return "redirect:/login?locked";
+    }
         if (user != null && user.getPassword().equals(password)) {
 
             session.setAttribute("user", user);

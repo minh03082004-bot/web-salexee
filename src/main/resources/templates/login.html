@@ -44,9 +44,18 @@ h2{
 
     <h2>Đăng nhập</h2>
 
-    <!-- báo sai -->
     <div th:if="${param.error}" class="alert alert-danger">
         Sai tài khoản hoặc mật khẩu
+    </div>
+    <div th:if="${success}"
+     class="alert alert-success">
+
+    <span th:text="${success}">
+    </span>
+
+     </div>
+    <div th:if="${param.locked}" class="alert alert-warning">
+        Tài khoản của bạn đã bị khóa.
     </div>
 
     <form action="/login" method="post">
@@ -59,13 +68,36 @@ h2{
                    required>
         </div>
 
+      
         <div class="mb-3">
-            <label>Mật khẩu</label>
-            <input type="password"
-                   name="password"
-                   class="form-control"
-                   required>
-        </div>
+
+    <label>Mật khẩu</label>
+
+    <div class="position-relative">
+
+        <input type="password"
+               id="password"
+               name="password"
+               class="form-control"
+               required>
+
+        <span onclick="togglePassword()"
+              style="
+                  position:absolute;
+                  right:15px;
+                  top:50%;
+                  transform:translateY(-50%);
+                  cursor:pointer;
+              ">
+
+            👁
+
+        </span>
+
+    </div>
+
+</div>
+
 
         <button type="submit"
                 class="btn btn-primary btn-login">
@@ -80,6 +112,23 @@ h2{
     </div>
 
 </div>
+<script>
 
+function togglePassword() {
+
+    let password =
+        document.getElementById("password");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+    } else {
+
+        password.type = "password";
+    }
+}
+
+</script>
 </body>
 </html>

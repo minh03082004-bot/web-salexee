@@ -30,7 +30,7 @@
     margin-top: auto !important;
 } 
 
-.brand-list{
+/* .brand-list{
     display:flex !important;
     justify-content:center !important;
     align-items:center !important;
@@ -80,7 +80,7 @@
 .brand-item.active span{
     color:#0d6efd !important;
     font-weight:bold !important;
-}
+} */
 .main-img {
     width: 500%!important; 
     max-width: 500px !important;        
@@ -118,3 +118,68 @@
     box-shadow: 0 0 10px rgba(13,110,253,0.5);
 }
 
+
+
+.brand-wrapper{
+    position: relative !important;
+    display:flex !important;
+    align-items:center !important;
+    margin-bottom:30px !important;
+}
+
+.brand-list{
+    display:flex !important;
+    flex-wrap: nowrap !important;
+    gap:20px    !important;
+    overflow-x:auto !important;
+    scroll-behavior:smooth !important;
+    padding: 6px  !important;
+    width:100% !important;
+}
+
+.brand-list::-webkit-scrollbar{
+    display:none !important;
+}
+
+.brand-item{
+       flex:0 0 auto !important;
+    min-width:120px !important;
+    text-align:center !important;
+    text-decoration:none !important;
+    color:black !important;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+.brand-logo{
+    width:75px !important;
+    height:75px !important;
+    border-radius:50% !important;
+    object-fit:contain !important;
+    border:3px solid #ddd !important;
+    padding:10px !important;
+    background:white    !important;
+    transition:0.3s !important;
+}
+
+.brand-logo:hover{
+    transform:scale(1.08) !important;
+    border-color:#0d6efd !important;
+}
+
+.scroll-btn{
+    border:none !important;
+    background:#fff !important;
+    width:45px !important;
+    height:45px !important;
+    border-radius:50% !important;
+    font-size:26px !important;
+    box-shadow:0 2px 8px rgba(0,0,0,0.2) !important;
+    cursor:pointer !important;
+    z-index:10 !important;
+}
+
+.scroll-btn:hover{
+    background:#f1f1f1 !important;
+}
