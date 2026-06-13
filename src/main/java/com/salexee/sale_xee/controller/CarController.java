@@ -403,6 +403,49 @@ public String saveBrand(
 
     brandRepository.save(brand);
 
-    return "redirect:/admin/brands";
+    return "redirect:/admin/brands?added";
+}
+@GetMapping("/admin/brands/edit/{id}")
+public String editBrand(
+        @PathVariable Long id,
+        Model model
+) {
+
+    Brand brand =
+            brandRepository.findById(id)
+            .orElse(null);
+
+    model.addAttribute("brand", brand);
+
+    return "edit-brand";
+}
+@PostMapping("/admin/brands/update")
+public String updateBrand(
+        @RequestParam Long id,
+        @RequestParam String name
+) {
+
+    Brand brand =
+            brandRepository.findById(id)
+            .orElse(null);
+
+    if(brand != null){
+
+        brand.setName(name);
+
+        brandRepository.save(brand);
+    }
+
+    return "redirect:/admin/brands?success";
+}
+
+@GetMapping("/admin/brands/delete/{id}")
+public String deleteBrand(
+        @PathVariable Long id
+) {
+
+    brandRepository.deleteById(id);
+
+   return "redirect:/admin/brands?deleted";
 }
 }

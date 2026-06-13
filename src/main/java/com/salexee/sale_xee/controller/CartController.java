@@ -138,10 +138,7 @@ public String checkout(HttpSession session,
 
     cartRepository.clearCart(user.getUsername());
 
-    model.addAttribute(
-            "message",
-            "Đặt mua xe thành công!"
-    );
+   
 
     return "order-success";
 }
