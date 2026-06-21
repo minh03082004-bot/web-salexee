@@ -16,13 +16,26 @@
             <h2 th:text="${totalCars}"></h2>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+        <div class="card text-center p-3 shadow">
+            <h5>Xe đã bán</h5>
+            <h2 th:text="${soldCars}"></h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card text-center p-3 shadow">
+            <h5>Xe còn hàng</h5>
+            <h2 th:text="${availableCars}"></h2>
+        </div>
+    </div>
+    <div class="col-md-3">
         <div class="card text-center p-3 shadow">
             <h5>User</h5>
-<h2 th:text="${totalUsers}"></h2>
+            <h2 th:text="${totalUsers}"></h2>
 
-<h5>Admin</h5>
-<h2 th:text="${totalAdmins}"></h2>
+            <h5>Admin</h5>
+             <h2 th:text="${totalAdmins}"></h2>
         </div>
     </div>
 
@@ -30,7 +43,7 @@
 
 <hr>
 
-<h4>Số xe theo hãng</h4>
+<!-- <h4>Số xe theo hãng</h4>
 
 <table class="table table-bordered">
     <tr>
@@ -43,8 +56,246 @@
         <td th:text="${item[1]}"></td>
     </tr>
 
+</table> -->
+<h4>Thống kê xe theo hãng</h4>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Hãng xe</th>
+            <th>Tổng xe</th>
+            <th>Đã bán</th>
+            <th>Còn hàng</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr th:each="item : ${brandStats}">
+
+            <td th:text="${item[0]}"></td>
+
+            <td th:text="${item[1]}"></td>
+
+            <td th:text="${item[2]}"></td>
+
+            <td th:text="${item[3]}"></td>
+
+        </tr>
+
+    </tbody>
+
 </table>
-<a href="javascript:history.back()" class="btn btn-outline-secondary">Quay lại</a>
+<hr>
+
+<h4>🏆 Top hãng bán chạy</h4>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+
+        <tr>
+
+            <th>Thứ hạng</th>
+
+            <th>Hãng xe</th>
+
+            <th>Số xe đã bán</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr th:each="item, stat : ${topBrands}">
+
+            <!-- <td>
+                <span th:text="${stat.count}"></span>
+            </td> -->
+             <td>
+
+        <span th:if="${stat.count == 1}">
+            🥇
+        </span>
+
+        <span th:if="${stat.count == 2}">
+            🥈
+        </span>
+
+        <span th:if="${stat.count == 3}">
+            🥉
+        </span>
+
+        <span th:if="${stat.count > 3}"
+              th:text="${stat.count}">
+        </span>
+
+    </td>
+
+            <td th:text="${item[0]}"></td>
+
+            <td th:text="${item[1]}"></td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+<hr>
+
+<h4>Thống kê xe bán theo ngày</h4>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+
+        <tr>
+            <th>Ngày bán</th>
+            <th>Số xe đã bán</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr th:each="item : ${soldByDate}">
+
+            <td th:text="${item[0]}"></td>
+
+            <td th:text="${item[1]}"></td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+<hr>
+
+<h4>Thống kê xe bán theo tháng</h4>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+
+        <tr>
+            <th>Tháng</th>
+            <th>Số xe đã bán</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        <tr th:each="item : ${soldByMonth}">
+
+            <td th:text="${item[1] + '/' + item[0]}"></td>
+
+            <td th:text="${item[2]}"></td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+<hr>
+
+<h4>Danh sách xe</h4>
+
+<table class="table table-bordered table-hover align-middle">
+
+    <thead class="table-dark">
+    <tr>
+        <th>Ảnh</th>
+        <th>Tên xe</th>
+        <th>Giá</th>
+        <th>Năm SX</th>
+        <th>Trạng thái</th>
+        <th>Ngày bán</th>
+        <th>Thao tác</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="car : ${cars}">
+
+        <td>
+            <img th:src="${car.image.startsWith('http')} 
+              ? ${car.image}: @{/images/{file}(file=${car.image})}"
+                 width="120"
+                 height="70"
+                 style="object-fit:cover;">
+        </td>
+
+        <td th:text="${car.name}"></td>
+
+        <td th:text="${#numbers.formatDecimal(car.price,0,'COMMA',0,'POINT')} + ' VNĐ'"></td>
+
+        <td th:text="${car.year}"></td>
+
+        <td>
+
+            <span th:if="${!car.sold}"
+                  class="badge bg-success">
+
+                CÒN HÀNG
+
+            </span>
+
+            <span th:if="${car.sold}"
+                  class="badge bg-danger">
+
+                ĐÃ BÁN
+
+            </span>
+
+        </td>
+        <td>
+
+    <span th:if="${car.sold}"
+          th:text="${car.soldDate}">
+    </span>
+
+    <span th:if="${!car.sold}">
+        -
+    </span>
+
+    </td>
+        <td>
+
+    <a th:href="@{/admin/toggleSold/{id}(id=${car.id})}"
+
+       th:if="${!car.sold}"
+
+       class="btn btn-danger btn-sm">
+
+        Đánh dấu Đã bán
+
+    </a>
+
+    <a th:href="@{/admin/toggleSold/{id}(id=${car.id})}"
+
+       th:if="${car.sold}"
+
+       class="btn btn-success btn-sm">
+
+        Đánh dấu Còn hàng
+
+    </a>
+
+</td>
+    </tr>
+
+    </tbody>
+
+</table>
+<!-- <a href="javascript:history.back()" class="btn btn-outline-secondary">Quay lại</a> -->
+ <a th:href="@{/admin/cars}"
+   class="btn btn-outline-secondary">
+    Quay lại
+</a>
 
 </body>
 </html>

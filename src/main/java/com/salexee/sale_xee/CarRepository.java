@@ -18,6 +18,46 @@ public interface CarRepository extends JpaRepository<Car, Long> {
                          Long minPrice,
                          Long maxPrice,
                          Pageable pageable);
-      @Query("SELECT c.brand, COUNT(c) FROM Car c GROUP BY c.brand")
+//       @Query("SELECT c.brand, COUNT(c) FROM Car c GROUP BY c.brand")
+// List<Object[]> countCarsByBrand();
+@Query("""
+SELECT c.brand,
+       COUNT(c),
+       SUM(CASE WHEN c.sold = true THEN 1 ELSE 0 END),
+       SUM(CASE WHEN c.sold = false THEN 1 ELSE 0 END)
+FROM Car c
+GROUP BY c.brand
+""")
 List<Object[]> countCarsByBrand();
+@Query("""
+SELECT c.soldDate, COUNT(c)
+FROM Car c
+WHERE c.sold = true
+GROUP BY c.soldDate
+ORDER BY c.soldDate DESC
+""")
+List<Object[]> countSoldCarsByDate();
+@Query("""
+SELECT YEAR(c.soldDate),
+       MONTH(c.soldDate),
+       COUNT(c)
+FROM Car c
+WHERE c.sold = true
+GROUP BY YEAR(c.soldDate),
+         MONTH(c.soldDate)
+ORDER BY YEAR(c.soldDate) DESC,
+         MONTH(c.soldDate) DESC
+""")
+List<Object[]> countSoldCarsByMonth();
+@Query("""
+SELECT c.brand, COUNT(c)
+FROM Car c
+WHERE c.sold = true
+GROUP BY c.brand
+ORDER BY COUNT(c) DESC
+""")
+List<Object[]> topSellingBrands();
+long countBySoldTrue();
+
+long countBySoldFalse();
 }

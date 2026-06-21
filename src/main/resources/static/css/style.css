@@ -183,3 +183,24 @@
 .scroll-btn:hover{
     background:#f1f1f1 !important;
 }
+
+
+.sold-badge{
+    position:absolute !important;
+    top:10px;
+    left:10px;
+
+    background:red;
+    color:white;
+
+    font-weight:bold;
+
+    padding:8px 12px;
+
+    border-radius:6px;
+
+    z-index:1000;
+
+    font-size:14px;
+}
+

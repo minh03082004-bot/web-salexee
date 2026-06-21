@@ -29,7 +29,27 @@ public class CartController {
 private CartRepository cartRepository;
 @Autowired
 private OrderRepository orderRepository;
-    @GetMapping("/cart/add/{id}")
+//     @GetMapping("/cart/add/{id}")
+// public String addToCart(@PathVariable Long id,
+//                         HttpSession session) {
+
+//     User user = (User) session.getAttribute("user");
+
+//     if (user == null) {
+//         return "redirect:/login";
+//     }
+
+//     CartItem item = new CartItem();
+
+//     item.setUsername(user.getUsername());
+
+//     item.setCarId(id);
+
+//     cartRepository.save(item);
+
+//     return "redirect:/cars";
+// }
+@GetMapping("/cart/add/{id}")
 public String addToCart(@PathVariable Long id,
                         HttpSession session) {
 
@@ -37,6 +57,16 @@ public String addToCart(@PathVariable Long id,
 
     if (user == null) {
         return "redirect:/login";
+    }
+
+    Car car = carRepository.findById(id).orElse(null);
+
+    if (car == null) {
+        return "redirect:/cars";
+    }
+
+    if (car.getSold()) {
+        return "redirect:/cars";
     }
 
     CartItem item = new CartItem();
@@ -49,7 +79,6 @@ public String addToCart(@PathVariable Long id,
 
     return "redirect:/cars";
 }
-
 @GetMapping("/cart")
 public String viewCart(HttpSession session,
                        Model model) {
@@ -122,13 +151,39 @@ public String checkout(HttpSession session,
 
         return "redirect:/cart";
     }
-    for (CartItem item : cartItems) {
+//     for (CartItem item : cartItems) {
+
+//     OrderItem order = new OrderItem();
+
+//     order.setUsername(user.getUsername());
+
+//     order.setCarId(item.getCarId());
+//     order.setPhone(phone);
+
+//     order.setOrderDate(LocalDateTime.now());
+
+//     orderRepository.save(order);
+// }
+for (CartItem item : cartItems) {
+
+    Car car = carRepository
+            .findById(item.getCarId())
+            .orElse(null);
+
+    if (car == null) {
+        continue;
+    }
+
+    if (car.getSold()) {
+        continue;
+    }
 
     OrderItem order = new OrderItem();
 
     order.setUsername(user.getUsername());
 
     order.setCarId(item.getCarId());
+
     order.setPhone(phone);
 
     order.setOrderDate(LocalDateTime.now());

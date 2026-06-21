@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -273,16 +274,27 @@ public String updateCar(
 @GetMapping("/admin/dashboard")
 public String dashboard(Model model) {
   List<Object[]> stats = carRepository.countCarsByBrand();
-model.addAttribute("brandStats", stats);
+    model.addAttribute("brandStats", stats);
+    List<Object[]> soldByDate = carRepository.countSoldCarsByDate();
+    model.addAttribute("soldByDate", soldByDate);
+    List<Object[]> soldByMonth = carRepository.countSoldCarsByMonth();
+    model.addAttribute("soldByMonth", soldByMonth);
+    List<Object[]> topBrands = carRepository.topSellingBrands();
+    model.addAttribute("topBrands", topBrands);
     long totalCars = carRepository.count();
     // long totalUsers = userRepository.count();
     long totalUsers = userRepository.countByRole("USER");
     long totalAdmins = userRepository.countByRole("ADMIN");
-model.addAttribute("totalUsers", totalUsers);
-model.addAttribute("totalAdmins", totalAdmins);
+    long soldCars = carRepository.countBySoldTrue();
+    long availableCars = carRepository.countBySoldFalse();
+    model.addAttribute("totalUsers", totalUsers);
+    model.addAttribute("totalAdmins", totalAdmins);
     model.addAttribute("totalCars", totalCars);
+    model.addAttribute("soldCars", soldCars);
+    model.addAttribute("availableCars", availableCars);
     // model.addAttribute("totalUsers", totalUsers);
-
+    List<Car> cars = carRepository.findAll();
+    model.addAttribute("cars", cars);
     return "admin-dashboard";
 }
 @GetMapping("/admin/orders")
@@ -447,5 +459,39 @@ public String deleteBrand(
     brandRepository.deleteById(id);
 
    return "redirect:/admin/brands?deleted";
+}
+@GetMapping("/admin/toggleSold/{id}")
+public String toggleSold(@PathVariable Long id) {
+
+    Car car = carRepository.findById(id).orElse(null);
+
+    // if (car != null) {
+
+    //     car.setSold(!car.getSold());
+
+    //     carRepository.save(car);
+
+    // }
+    if (car != null) {
+
+    if (!car.getSold()) {
+
+        car.setSold(true);
+
+        car.setSoldDate(LocalDate.now());
+
+    } else {
+
+        car.setSold(false);
+
+        car.setSoldDate(null);
+
+    }
+
+    carRepository.save(car);
+
+    }
+
+    return "redirect:/admin/dashboard";
 }
 }

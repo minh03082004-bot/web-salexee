@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>HAI ANH - Quản lý Showroom</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style.css?v=5}">
+    <link rel="stylesheet" th:href="@{/css/style.css?v=8}">
 </head>
 <div th:if="${success}">
     <script>
@@ -221,9 +221,13 @@
         <div class="row">
             <div class="col-md-4 mb-4" th:each="xe : ${listXe}">
                         <div class="card shadow-sm h-100">
-                            <div class="car-img-container">
+                            <div class="car-img-container position-relative">
                         <img th:src="${xe.image.startsWith('http')} 
               ? ${xe.image}: @{/images/{file}(file=${xe.image})}" class="card-img-top" alt="Car">
+              <span th:if="${xe.sold}"
+              class="sold-badge">
+             ĐÃ BÁN
+            </span>
             </div>
             
                       <div class="card-body">

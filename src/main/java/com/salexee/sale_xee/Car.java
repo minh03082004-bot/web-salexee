@@ -1,5 +1,7 @@
 package com.salexee.sale_xee;
  
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,8 @@ public class Car {
     private String description;
     @Column(name = "brand")
       private String brand;
+      private Boolean sold = false;
+      private LocalDate soldDate;
     public Car() {
     }
     public Car(String name, Long price, String image,String year,String description,String brand, String images) {
@@ -68,5 +72,19 @@ public class Car {
 
 public void setImages(String images) {
     this.images = images;
+}
+public Boolean getSold() {
+    return sold;
+}
+
+public void setSold(Boolean sold) {
+    this.sold = sold;
+}
+public LocalDate getSoldDate() {
+    return soldDate;
+}
+
+public void setSoldDate(LocalDate soldDate) {
+    this.soldDate = soldDate;
 }
 }
